@@ -1,0 +1,343 @@
+/* ─────────────────────────────────────────────
+   View — estilos do Cookbook
+   ───────────────────────────────────────────── */
+
+:root {
+  --bg: #f7f4ef;
+  --surface: #ffffff;
+  --surface2: #f0ece4;
+  --border: #ddd8ce;
+  --accent: #a06c18;
+  --accent-dim: #c8912a;
+  --text: #1a1610;
+  --text-muted: #6b5f4a;
+  --text-dim: #a89c88;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Georgia', serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ── Header ── */
+header {
+  border-bottom: 1px solid var(--border);
+  padding: 48px 0 36px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2rem;
+  font-weight: normal;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+header p {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ── Layout ── */
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 24px 100px;
+}
+
+/* ── Category ── */
+.category { margin-bottom: 72px; }
+
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.category-header h2 {
+  font-size: 0.75rem;
+  font-weight: normal;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.category-header::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── Recipe list ── */
+.recipe-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* ── Recipe card ── */
+.recipe {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.recipe-toggle {
+  width: 100%;
+  background: none;
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 22px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  text-align: left;
+}
+
+.recipe-toggle:hover { background: var(--surface2); }
+
+.recipe-title { font-size: 1.05rem; color: var(--text); }
+
+.recipe-meta {
+  display: flex;
+  gap: 20px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.chevron {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--text-dim);
+  transition: transform 0.25s ease;
+}
+
+.recipe.open .chevron { transform: rotate(180deg); }
+
+/* ── Recipe body ── */
+.recipe-body {
+  display: none;
+  padding: 0 28px 32px;
+  border-top: 1px solid var(--border);
+}
+
+.recipe.open .recipe-body { display: block; }
+
+/* ── Servings control ── */
+.servings-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 22px 0 0;
+  padding: 14px 18px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.servings-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-right: 4px;
+}
+
+.servings-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.servings-btn:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent-dim);
+  color: #fff;
+}
+
+.servings-input {
+  width: 52px;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: monospace;
+  font-size: 1rem;
+  padding: 3px 6px;
+  -moz-appearance: textfield;
+}
+
+.servings-input::-webkit-inner-spin-button,
+.servings-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+.servings-input:focus { outline: none; border-color: var(--accent-dim); }
+
+.servings-scaled-badge {
+  margin-left: auto;
+  font-size: 0.72rem;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.servings-scaled-badge.visible { opacity: 1; }
+
+.reset-btn {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: color 0.15s;
+}
+
+.reset-btn:hover { color: var(--accent); }
+
+/* ── Section labels inside recipe ── */
+.recipe-body h3 {
+  font-size: 0.7rem;
+  font-weight: normal;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 28px 0 14px;
+}
+
+.recipe-body h4 {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 18px 0 8px;
+  font-weight: normal;
+}
+
+/* ── Ingredients ── */
+.ingredient-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ingredient-list li {
+  font-size: 0.92rem;
+  color: var(--text);
+  padding-left: 16px;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.ingredient-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--text-dim);
+}
+
+.ingredient-list li.scaled { color: var(--accent); }
+
+.qty { font-variant-numeric: tabular-nums; }
+
+/* ── Steps ── */
+.step-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.step-list li {
+  counter-increment: steps;
+  font-size: 0.92rem;
+  color: var(--text);
+  padding-left: 36px;
+  position: relative;
+}
+
+.step-list li::before {
+  content: counter(steps);
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 22px;
+  height: 22px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.68rem;
+  color: var(--accent);
+  font-family: monospace;
+}
+
+/* ── Tip ── */
+.tip {
+  margin-top: 24px;
+  padding: 16px 18px;
+  background: var(--surface2);
+  border-left: 3px solid var(--accent-dim);
+  border-radius: 4px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.tip strong {
+  color: var(--accent);
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+/* ── Empty category ── */
+.empty {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  padding: 16px 0;
+}
+
+/* ── Footer ── */
+footer {
+  text-align: center;
+  padding: 40px;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+}

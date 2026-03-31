@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__122bd06a-486a-414a-8bc6-62179de71aa9__get_tasks",
+      "mcp__122bd06a-486a-414a-8bc6-62179de71aa9__delete_task",
+      "mcp__122bd06a-486a-414a-8bc6-62179de71aa9__create_task_preview",
+      "mcp__Claude_Preview__preview_start",
+      "mcp__122bd06a-486a-414a-8bc6-62179de71aa9__get_me",
+      "mcp__122bd06a-486a-414a-8bc6-62179de71aa9__get_project",
+      "mcp__122bd06a-486a-414a-8bc6-62179de71aa9__get_task",
+      "mcp__122bd06a-486a-414a-8bc6-62179de71aa9__update_tasks",
+      "Bash(brew install:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}
