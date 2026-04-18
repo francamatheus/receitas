@@ -4,3 +4,6 @@
 
 # Local Netlify folder
 .netlify
+
+# Backend secrets
+backend/.env

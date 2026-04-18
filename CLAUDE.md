@@ -8,7 +8,7 @@ Você é meu assistente de culinária pessoal baseado em Atibaia, SP, Brasil.
 
 Cookbook pessoal digital — um site para registrar, organizar e consultar receitas de comfort food. O site exibe as receitas com cards expansíveis, permite escalar porções dinamicamente e é acessível pelo celular.
 
-**Stack:** HTML + CSS + JavaScript vanilla. Sem frameworks, sem build step.
+**Stack:** HTML + CSS + JavaScript vanilla no frontend. Backend Python (FastAPI) no Fly.io. Storage no Cloudflare R2.
 
 ### Onde está hospedado
 
@@ -16,15 +16,25 @@ Cookbook pessoal digital — um site para registrar, organizar e consultar recei
 |---|---|
 | GitHub | `github.com/francamatheus/receitas` |
 | Netlify | `receitas-francamatheus.netlify.app` |
-| Asana | Projeto **Receitas** (gerenciamento de tasks e features) |
+| Backend (Fly.io) | `https://receitas-backend.fly.dev` |
+| Storage (R2) | bucket `receitas-francamatheus` · public URL `https://pub-de1b4777eb0446bdb6695fd75f99cbdf.r2.dev` |
+| Tasks | `tasks.json` na raiz do projeto (backlog local) |
 
-### Planos futuros (já mapeados no Asana)
+### Arquitetura
+
+- Frontend (Netlify) faz `fetch` em `GET /data` no backend Fly.io
+- Backend lê/grava `data.json` no R2 via boto3 (S3-compatible)
+- Endpoints POST/PUT protegidos por header `X-API-Key`
+- Código do backend em `backend/` — `main.py`, `r2.py`, `Dockerfile`
+- Secrets do Fly.io: `R2_ACCESS_KEY`, `R2_SECRET_KEY`, `R2_BUCKET`, `R2_ENDPOINT_URL`, `R2_PUBLIC_URL`, `API_KEY`
+- Variáveis locais do backend em `backend/.env` (gitignored)
+- URL do backend no frontend em `js/config.js`
+
+### Planos futuros (mapeados em `tasks.json`)
 
 - **Campo de busca** — filtrar receitas em tempo real por título
 - **Lista de compras compartilhável** — gerar lista de ingredientes (com porções escaladas) e compartilhar via WhatsApp ou email
 - **Escala dinâmica completa** — atualizar o texto do Modo de Preparo com as quantidades recalculadas
-- **Ajustes no formulário de importação** — melhorias na entrada de novas receitas
-- **Refatoração de dados** — mover receitas do `data.js` hardcoded para os arquivos `.md` individuais, com script que gera o `data.js` automaticamente a cada deploy
 
 ---
 

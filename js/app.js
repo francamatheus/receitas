@@ -4,12 +4,13 @@
 
 // ── Render ───────────────────────────────────
 
-function render() {
+function render(categories, recipes) {
   const main = document.getElementById('cookbook');
+  main.innerHTML = '';
 
-  CATEGORIES.forEach(cat => {
-    const recipes = RECIPES.filter(r => r.category === cat.id);
-    main.appendChild(renderCategory(cat, recipes));
+  categories.forEach(cat => {
+    const list = recipes.filter(r => r.category === cat.id);
+    main.appendChild(renderCategory(cat, list));
   });
 }
 
@@ -235,4 +236,19 @@ function formatQty(n) {
 
 // ── Boot ─────────────────────────────────────
 
-document.addEventListener('DOMContentLoaded', render);
+async function boot() {
+  const main = document.getElementById('cookbook');
+  main.innerHTML = '<p class="loading">Carregando receitas…</p>';
+
+  try {
+    const res = await fetch(`${BACKEND_URL}/data`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const { categories, recipes } = await res.json();
+    render(categories, recipes);
+  } catch (err) {
+    main.innerHTML = `<p class="error">Erro ao carregar receitas. Recarregue a página.</p>`;
+    console.error(err);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', boot);

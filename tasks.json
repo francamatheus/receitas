@@ -1,0 +1,213 @@
+{
+  "project": "Receitas",
+  "sections": [
+    {
+      "name": "BACKEND",
+      "tasks": [
+        {
+          "id": "backend-001",
+          "name": "[Infra] Configurar Cloudflare R2",
+          "status": "done",
+          "priority": "High",
+          "created_at": "2026-04-18",
+          "completed_at": null,
+          "notes": "Criar bucket R2 no Cloudflare, configurar acesso público e gerar credenciais de acesso programático.",
+          "subtasks": [
+            { "id": "backend-001-1", "name": "Criar conta Cloudflare e habilitar R2", "status": "todo" },
+            { "id": "backend-001-2", "name": "Criar bucket com leitura pública", "status": "todo" },
+            { "id": "backend-001-3", "name": "Gerar R2_ACCESS_KEY e R2_SECRET_KEY via API Tokens", "status": "todo" },
+            { "id": "backend-001-4", "name": "Anotar R2_PUBLIC_URL do bucket", "status": "todo" }
+          ]
+        },
+        {
+          "id": "backend-002",
+          "name": "[Infra] Configurar Fly.io",
+          "status": "done",
+          "priority": "High",
+          "created_at": "2026-04-18",
+          "completed_at": null,
+          "notes": "Criar app no Fly.io free tier para hospedar o servidor Python.",
+          "subtasks": [
+            { "id": "backend-002-1", "name": "Instalar flyctl e autenticar", "status": "todo" },
+            { "id": "backend-002-2", "name": "Criar app com fly launch (free tier)", "status": "todo" },
+            { "id": "backend-002-3", "name": "Configurar secrets: R2_ACCESS_KEY, R2_SECRET_KEY, R2_BUCKET, R2_ENDPOINT_URL, R2_PUBLIC_URL, API_KEY", "status": "todo" }
+          ]
+        },
+        {
+          "id": "backend-003",
+          "name": "[Backend] Criar servidor Python base",
+          "status": "done",
+          "priority": "High",
+          "created_at": "2026-04-18",
+          "completed_at": null,
+          "notes": "Servidor Python com helpers R2 e validação de API key. Arquivos: backend/main.py, backend/r2.py, backend/requirements.txt",
+          "subtasks": [
+            { "id": "backend-003-1", "name": "Criar backend/requirements.txt com boto3 e framework HTTP (fastapi ou flask)", "status": "todo" },
+            { "id": "backend-003-2", "name": "Criar backend/r2.py com helpers r2_get(key) e r2_put(key, content, content_type)", "status": "todo" },
+            { "id": "backend-003-3", "name": "Criar middleware de validação de API key (header X-API-Key nos endpoints POST)", "status": "todo" },
+            { "id": "backend-003-4", "name": "Criar Dockerfile para deploy no Fly.io", "status": "todo" }
+          ]
+        },
+        {
+          "id": "backend-004",
+          "name": "[Backend] Migrar leitura/escrita de arquivos para R2",
+          "status": "done",
+          "priority": "Medium",
+          "created_at": "2026-04-18",
+          "completed_at": null,
+          "notes": "Substituir todo open(arquivo, r/w) pelos helpers R2. Redirecionar rotas de arquivos estáticos para URLs públicas do R2.",
+          "subtasks": [
+            { "id": "backend-004-1", "name": "Mapear todos os open() existentes no código Python", "status": "todo" },
+            { "id": "backend-004-2", "name": "Substituir leituras por r2_get(key)", "status": "todo" },
+            { "id": "backend-004-3", "name": "Substituir escritas por r2_put(key, content, content_type)", "status": "todo" },
+            { "id": "backend-004-4", "name": "Redirecionar rotas de arquivos estáticos para R2_PUBLIC_URL", "status": "todo" }
+          ]
+        },
+        {
+          "id": "backend-005",
+          "name": "[Frontend] Atualizar fetch para URLs absolutas do R2",
+          "status": "done",
+          "priority": "Medium",
+          "created_at": "2026-04-18",
+          "completed_at": null,
+          "notes": "Substituir paths relativos por URLs absolutas do R2 no frontend Netlify. Arquivos: js/app.js, js/data.js",
+          "subtasks": [
+            { "id": "backend-005-1", "name": "Mapear todos os fetch() e referências a paths relativos em app.js", "status": "todo" },
+            { "id": "backend-005-2", "name": "Substituir por URLs absolutas do R2_PUBLIC_URL", "status": "todo" },
+            { "id": "backend-005-3", "name": "Testar CORS entre Netlify e R2", "status": "todo" }
+          ]
+        },
+        {
+          "id": "backend-006",
+          "name": "[Infra] Deploy e smoke test",
+          "status": "done",
+          "priority": "Medium",
+          "created_at": "2026-04-18",
+          "completed_at": null,
+          "notes": "Fazer deploy completo e validar que frontend + backend + R2 funcionam integrados.",
+          "subtasks": [
+            { "id": "backend-006-1", "name": "Deploy no Fly.io com fly deploy", "status": "todo" },
+            { "id": "backend-006-2", "name": "Upload de arquivo de teste no R2 e validar URL pública", "status": "todo" },
+            { "id": "backend-006-3", "name": "Testar endpoint POST com X-API-Key", "status": "todo" },
+            { "id": "backend-006-4", "name": "Testar frontend no Netlify consumindo dados do R2", "status": "todo" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "INFRA",
+      "tasks": [
+        {
+          "id": "1213893299496109",
+          "name": "Criação de Skill para HandOff e pasta de HandOff",
+          "status": "todo",
+          "priority": null,
+          "created_at": "2026-03-31",
+          "completed_at": null,
+          "notes": null,
+          "subtasks": []
+        }
+      ]
+    },
+    {
+      "name": "FEATURE",
+      "tasks": [
+        {
+          "id": "1213886928110832",
+          "name": "[Feature] Lista de compras compartilhável",
+          "status": "todo",
+          "priority": "Medium",
+          "created_at": "2026-03-31",
+          "completed_at": null,
+          "notes": "Adicionar botão em cada receita que gera a lista de ingredientes (com quantidades já escaladas, se aplicável) e permite compartilhar via WhatsApp ou Email. Arquivos: js/app.js, css/style.css",
+          "subtasks": [
+            { "id": "1213886928110834", "name": "Implementar função que gera lista formatada com ingredientes escalados", "status": "todo" },
+            { "id": "1213886928110835", "name": "Adicionar botão \"Lista de compras\" na UI (app.js + style.css)", "status": "todo" },
+            { "id": "1213886928110836", "name": "Integrar compartilhamento via WhatsApp (wa.me com texto pré-formatado)", "status": "todo" },
+            { "id": "1213886928110837", "name": "Integrar compartilhamento via Email (mailto com subject + body)", "status": "todo" }
+          ]
+        },
+        {
+          "id": "1213893299407749",
+          "name": "[Feature] Campo de busca — filtrar receitas em tempo real",
+          "status": "todo",
+          "priority": null,
+          "created_at": "2026-03-31",
+          "completed_at": null,
+          "notes": "Adicionar um campo de busca no topo do site que filtra as receitas em tempo real conforme o usuário digita.",
+          "subtasks": [
+            { "id": "1213893299407751", "name": "Adicionar input de busca na UI (index.html + style.css)", "status": "todo" },
+            { "id": "1213893299407752", "name": "Implementar filtro por título em tempo real (app.js)", "status": "todo" },
+            { "id": "1213893299407753", "name": "Esconder categorias vazias durante a busca", "status": "todo" },
+            { "id": "1213893299407754", "name": "Limpar busca ao clicar em X", "status": "todo" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "BUGS",
+      "tasks": [
+        {
+          "id": "1213886928110826",
+          "name": "[Feature] Escala dinâmica completa — atualizar texto do Modo de Preparo",
+          "status": "todo",
+          "priority": "High",
+          "created_at": "2026-03-31",
+          "completed_at": null,
+          "notes": "Ao ajustar o número de porções, apenas a lista de ingredientes é atualizada. Os textos dos passos do Modo de preparo ainda mostram as quantidades originais hardcoded. Arquivos: js/data.js, js/app.js",
+          "subtasks": [
+            { "id": "1213886928110829", "name": "Mapear quantidades nos textos dos passos em data.js (adicionar campo scalable nos steps)", "status": "todo" },
+            { "id": "1213886928110830", "name": "Implementar substituição dinâmica das quantidades em app.js", "status": "todo" },
+            { "id": "1213886928110831", "name": "Testar escala em todas as receitas existentes", "status": "todo" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TECH DEBIT",
+      "tasks": [
+        {
+          "id": "1213893299407756",
+          "name": "Refatorar pipeline de dados — receitas em .md, geração automática do data.js",
+          "status": "todo",
+          "priority": null,
+          "created_at": "2026-03-31",
+          "completed_at": null,
+          "notes": "Mover as receitas do data.js hardcoded para arquivos .md individuais e criar um script que lê esses .md e gera o data.js automaticamente. Arquivos: receitas/**/*.md, js/data.js, build/generate-data.js",
+          "subtasks": [
+            {
+              "id": "1213893299496116",
+              "name": "Definir formato dos .md para suportar todos os campos do data.js",
+              "status": "todo",
+              "notes": "Mapear todos os campos usados no data.js (ingredientGroups, stepGroups, tip, prepTime, cookTime, servings, etc.) e definir como representá-los em Markdown com frontmatter YAML."
+            },
+            {
+              "id": "1213893299496117",
+              "name": "Atualizar receitas existentes com o novo formato",
+              "status": "todo",
+              "notes": "Reescrever hamburguer-artesanal.md e burger-sauce-classico.md com frontmatter YAML completo."
+            },
+            {
+              "id": "1213893299496118",
+              "name": "Criar script build/generate-data.js",
+              "status": "todo",
+              "notes": "Script Node.js que lê todos os .md em receitas/**/*, faz parse do frontmatter YAML e corpo Markdown, e escreve o js/data.js."
+            },
+            {
+              "id": "1213893299496119",
+              "name": "Integrar script no fluxo de deploy",
+              "status": "todo",
+              "notes": "Adicionar package.json com script 'build' que roda o generate-data.js. Atualizar comando de deploy do Netlify. Arquivos: package.json, netlify.toml (criar)."
+            },
+            {
+              "id": "1213893299496120",
+              "name": "Remover dados hardcoded do data.js",
+              "status": "todo",
+              "notes": "Após o script estar funcionando, limpar o data.js de receitas hardcoded."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
