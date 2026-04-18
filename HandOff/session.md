@@ -33,7 +33,7 @@
 - Backend: `https://receitas-backend.fly.dev` — FastAPI + R2
 - Storage: Cloudflare R2, bucket `receitas-francamatheus`, arquivo `data.json`
 - 2 receitas salvas: Hambúrguer Artesanal e Burger Sauce Clássico
-- Auto-deploy Netlify ativo: push na `main` → site atualiza
+- Deploy Netlify: **manual via CLI** — `netlify deploy --dir=. --prod` (rodar na raiz do projeto). Auto-deploy foi removido pelo usuário.
 
 ## Arquitetura atual
 

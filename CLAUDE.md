@@ -15,7 +15,7 @@ Cookbook pessoal digital — um site para registrar, organizar e consultar recei
 | Plataforma | Endereço / Nome |
 |---|---|
 | GitHub | `github.com/francamatheus/receitas` |
-| Netlify | `receitas-francamatheus.netlify.app` |
+| Netlify | `receitas-francamatheus.netlify.app` (deploy manual via CLI: `netlify deploy --dir=. --prod`) |
 | Backend (Fly.io) | `https://receitas-backend.fly.dev` |
 | Storage (R2) | bucket `receitas-francamatheus` · public URL `https://pub-de1b4777eb0446bdb6695fd75f99cbdf.r2.dev` |
 | Tasks | `tasks.json` na raiz do projeto (backlog local) |
