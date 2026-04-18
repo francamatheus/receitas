@@ -113,6 +113,41 @@
       "name": "FEATURE",
       "tasks": [
         {
+          "id": "feature-add-recipe",
+          "name": "[Feature] Adicionar receitas — 3 formas de entrada",
+          "status": "todo",
+          "priority": "High",
+          "created_at": "2026-04-18",
+          "completed_at": null,
+          "notes": "Permitir adicionar novas receitas de 3 formas diferentes. Todas devem converter para o formato padrão do data.json e salvar via PUT /data no backend.",
+          "subtasks": [
+            {
+              "id": "feature-add-recipe-1",
+              "name": "Manual — skill /nova-receita traduz para o formato JSON do backend",
+              "status": "todo",
+              "notes": "Hoje a skill cria apenas o .md. Adaptar para também gerar o objeto JSON e fazer PUT /data via API key. Ou criar uma skill separada /publicar-receita que lê o .md e sobe para o R2."
+            },
+            {
+              "id": "feature-add-recipe-1b",
+              "name": "Campo de texto no site — usuário digita receita em linguagem livre e IA estrutura",
+              "status": "todo",
+              "notes": "Usuário cola ou digita uma receita no site → frontend POST /recipes/import → backend chama API do Claude com prompt fixo (schema do data.json + texto) → Claude devolve JSON estruturado → backend salva no R2. A skill /nova-receita serve de referência para o prompt, mas não é usada diretamente. Custo estimado: ~$0.02 por receita (Sonnet)."
+            },
+            {
+              "id": "feature-add-recipe-2",
+              "name": "Foto — tirar foto de uma receita e extrair conteúdo via visão",
+              "status": "todo",
+              "notes": "Ideia inicial: usuário manda a foto para o Claude, que usa visão para extrair ingredientes e passos, traduz para o formato padrão e salva. Ainda não definido como será o fluxo (skill? endpoint?). Avaliar limitações de OCR em receitas manuscritas vs impressas."
+            },
+            {
+              "id": "feature-add-recipe-3",
+              "name": "Link — colar URL de receita (Facebook, Instagram, Pinterest, etc) e extrair conteúdo",
+              "status": "todo",
+              "notes": "Ideia inicial: scraping do link + parsing do conteúdo via LLM para extrair receita estruturada. Desafios: sites com JS pesado, Instagram exige login, Pinterest pode bloquear bots. Avaliar quais fontes são viáveis e como tratar cada uma."
+            }
+          ]
+        },
+        {
           "id": "1213886928110832",
           "name": "[Feature] Lista de compras compartilhável",
           "status": "todo",
